@@ -1,0 +1,25 @@
+# Slither triage (reviewed findings hidden via slither.db.json)
+
+Slither 0.11.6 ignores inline `slither-disable` comments on Windows (it normalises paths with `posixpath`, so
+backslash paths never match). Reviewed false positives are therefore recorded in `slither.db.json`, the
+official triage database. Any code change to these lines resurfaces the finding for re-review.
+
+| Impact | Detector | Location | Justification |
+|---|---|---|---|
+| High | reentrancy-balance | src/vault/FixedRateVault.sol#168-195 | Balance is read on the vault's own immutable, governance-configured ERC-4626 source; all vault entry points are nonReentrant and a malicious source already controls the deposited funds, so a stale read gives an attacker nothing. Post-conditions verify our own balance. |
+| High | reentrancy-balance | src/vault/FixedRateVault.sol#195-208 | Balance is read on the vault's own immutable, governance-configured ERC-4626 source; all vault entry points are nonReentrant and a malicious source already controls the deposited funds, so a stale read gives an attacker nothing. Post-conditions verify our own balance. |
+| Medium | incorrect-equality | src/oracle/RateOracle.sol#116-143 | Intentional exact comparisons on timestamps (observation lookup / same-block snapshot) or a zero-balance short-circuit; not a balance-based guard an attacker can game. |
+| Medium | incorrect-equality | src/oracle/RateOracle.sol#100-109 | Intentional exact comparisons on timestamps (observation lookup / same-block snapshot) or a zero-balance short-circuit; not a balance-based guard an attacker can game. |
+| Medium | incorrect-equality | src/oracle/RateOracle.sol#116-143 | Intentional exact comparisons on timestamps (observation lookup / same-block snapshot) or a zero-balance short-circuit; not a balance-based guard an attacker can game. |
+| Medium | incorrect-equality | src/fees/FeeCollector.sol#49-71 | Intentional exact comparisons on timestamps (observation lookup / same-block snapshot) or a zero-balance short-circuit; not a balance-based guard an attacker can game. |
+| Medium | unused-return | src/periphery/OracleAdapter.sol#73-86 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/vault/FixedRateVault.sol#168-195 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/vault/FixedRateVault.sol#168-195 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/core/SwapMarket.sol#191-201 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/vault/FixedRateVault.sol#195-208 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/oracle/sources/ChainlinkRateSource.sol#42-52 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/vault/FixedRateVault.sol#152-168 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+| Medium | unused-return | src/periphery/OracleAdapter.sol#50-65 | Chainlink latestRoundData: roundId/answeredInRound are deprecated (OCR); staleness enforced via updatedAt. oracle.snapshot(): result re-checked through latestObservation().timestamp. ERC-4626 source calls: verified with balance post-conditions. market.trade fee: charged internally. |
+
+Low-impact findings (timestamp, calls-loop, reentrancy-events/benign, missing-zero-check) are left visible;
+see THREAT_MODEL.md for why block.timestamp use and bounded loops (<= 8 LP positions, <= 64 tick crossings) are safe.

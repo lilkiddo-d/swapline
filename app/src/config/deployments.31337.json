@@ -1,0 +1,114 @@
+{
+  "chainId": 31337,
+  "complianceRegistry": "0x210Abb48bF244967Bee08fD491B334b9B624A47F",
+  "deployBlock": 26153072,
+  "deployedAt": 1791527511,
+  "deployer": "0x5ea1000000000000000000000000000000005Ea1",
+  "feeCollector": "0x2f44bf11ec0676E72841b89Bc8A2FAAC1b7492dc",
+  "guardian": "0x5ea1000000000000000000000000000000005Ea1",
+  "liquidator": "0x854cA3DD5dF8A3659C65F26B273e51EE5e8fB724",
+  "lpPositions": "0xb93719E7e611e170296a042C009660c34529F5cd",
+  "marginEngine": "0x02b224b5B555181909493050b77A897C9F04EfB6",
+  "marketFactory": "0x259e293bceDB2ca31E8202760c249247ea610814",
+  "markets": [
+    {
+      "market": "0x65FfdA74230086316b289847802B4ca21029A250",
+      "maturity": 1794096000,
+      "maturityDays": 30,
+      "source": "steakUSDG",
+      "vamm": "0xCB9b5025Cc8243585420a938e62f44b010d7C8d4",
+      "vault": "0x71Eba8D6a71350379C3D47a55e21F88E3933CB35"
+    },
+    {
+      "market": "0x422b589622324e547C54845BBf93702f71ac6eF4",
+      "maturity": 1799366400,
+      "maturityDays": 91,
+      "source": "steakUSDG",
+      "vamm": "0x22734D0591561b5b5F92603975a80F645Fbd9C05",
+      "vault": "0xfA618E6E7C998F536A9596FA45E397cBEEDEb87A"
+    },
+    {
+      "market": "0x7C0aE53E724B60bB4b2DEc93ab0eC8B5CfAB4091",
+      "maturity": 1807228800,
+      "maturityDays": 182,
+      "source": "steakUSDG",
+      "vamm": "0x27B281761595b7986792e1d00EE2051DFC6bC5cF",
+      "vault": "0x7F5ca8ae4B3F4717E72597a9587A8b007Bf3540C"
+    },
+    {
+      "market": "0x89A4f479dA4157765D0A0991600Ca89B48974B44",
+      "maturity": 1794096000,
+      "maturityDays": 30,
+      "source": "spUSDG",
+      "vamm": "0x617c04e5450ffEE1f149Afc2F5a720034892FE11",
+      "vault": "0x4423F118B74Ef8Ee69f6000d6D95B18dF64580c2"
+    },
+    {
+      "market": "0x39c3b77427a278072b85Cd15e2780C7fa7853712",
+      "maturity": 1799366400,
+      "maturityDays": 91,
+      "source": "spUSDG",
+      "vamm": "0x82856C020B3aaFF36ce0157b64d09cFaa63014E9",
+      "vault": "0x8002880Ca0b91bE7750Fae87fCf033014a12eFf4"
+    },
+    {
+      "market": "0x44840EEFD11Da49708A22e43746D22dB5Ad207af",
+      "maturity": 1807228800,
+      "maturityDays": 182,
+      "source": "spUSDG",
+      "vamm": "0xe44Eb20C7fD3139bBA74572CcEc9fb1157aCE46C",
+      "vault": "0xdfA8eD6dd1D90583067cBBeF4F186651256056d9"
+    },
+    {
+      "market": "0x13448C7C9FF176f591Aab4380DB4A85ceF7Eb8Cb",
+      "maturity": 1794096000,
+      "maturityDays": 30,
+      "source": "syrupUSDG",
+      "vamm": "0xE6564D1F3ee3b80E3b9CBe5F85c46480Cc701473",
+      "vault": "0x0000000000000000000000000000000000000000"
+    },
+    {
+      "market": "0xdc7fedC5781069f9D333131813D3883cBD75dDA7",
+      "maturity": 1799366400,
+      "maturityDays": 91,
+      "source": "syrupUSDG",
+      "vamm": "0x853C229b6FB5800a1316c152cbbeB78EBaA6B296",
+      "vault": "0x0000000000000000000000000000000000000000"
+    },
+    {
+      "market": "0xd5A9E083C15Ad2F8D5E914AeeC8E62e613da04Fe",
+      "maturity": 1807228800,
+      "maturityDays": 182,
+      "source": "syrupUSDG",
+      "vamm": "0x447c4E4fd961F4244176c187A4b757E174d91B73",
+      "vault": "0x0000000000000000000000000000000000000000"
+    }
+  ],
+  "oracleAdapter": "0xd9792cB8Ffc936e88f751A84c2Adc02FCd7C10c6",
+  "projectTokenHooks": "0x43a9E26b5C78982d53Ee075Bc8e389227debe789",
+  "sources": [
+    {
+      "description": "Steakhouse USDG - Morpho Vault V2 (on-chain USDG lending rate)",
+      "key": "steakUSDG",
+      "oracle": "0xb7850c32112F5C73D1208b3d68602Aa7AA9E1a97",
+      "rateSource": "0x8ccAafe41293D112620cd6eb54f76DD9A0253F92",
+      "yieldToken": "0xBeEff033F34C046626B8D0A041844C5d1A5409dd"
+    },
+    {
+      "description": "Spark Savings USDG (Sky savings rate, T-bill-backed collateral base)",
+      "key": "spUSDG",
+      "oracle": "0xD2BF0c5C9FF08Efb03bE5e94669198c8cf067bB9",
+      "rateSource": "0x2Ccab6B326E5236c5D04d3b8f1FA0Bd1D8f8904F",
+      "yieldToken": "0xde770c84FE66E063336b31737cFE9790f18c4087"
+    },
+    {
+      "description": "Maple syrupUSDG (institutional credit, bridged; Maple exchange-rate feed)",
+      "key": "syrupUSDG",
+      "oracle": "0x5dd9AB5F8950e9dBD71eCde3aDa47fD21D0C80AB",
+      "rateSource": "0x065ab080F4684410299932f64Dcef27efCcbC716",
+      "yieldToken": "0x40858070814a57FdF33a613ae84fE0a8b4a874f7"
+    }
+  ],
+  "stablecoin": "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168",
+  "timelock": "0x3740607E1024f27cD77D4fA8E0055899210c044f"
+}

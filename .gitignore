@@ -1,0 +1,22 @@
+node_modules/
+.next/
+out/
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+contracts/broadcast/*/*/dry-run/
+contracts/lcov.info
+scripts/fork/.logs/
+scripts/fork/.bin/
+.env
+.env.*
+!.env.example
+*.log
+.vercel
+deployments/*.dry-run.json
+
+# local
+.claude/
+scripts/.keeper-state.*.json
+app/.env.local
+contracts/lcov.info

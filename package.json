@@ -1,0 +1,24 @@
+{
+  "name": "swapline",
+  "private": true,
+  "description": "Swapline - interest-rate swaps on RWA and lending yields (Robinhood Chain)",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "build:contracts": "cd contracts && forge build",
+    "test:contracts": "cd contracts && forge test",
+    "test:fork": "cd contracts && forge test --match-path \"test/fork/*\"",
+    "coverage": "cd contracts && forge coverage --report summary --no-match-path \"test/fork/*\"",
+    "slither": "cd contracts && slither . --config-file slither.config.json",
+    "dev": "pnpm --filter @swapline/app dev",
+    "build:app": "pnpm --filter @swapline/app build",
+    "keeper": "pnpm --filter @swapline/scripts keeper",
+    "keeper:snapshot": "pnpm --filter @swapline/scripts snapshot",
+    "keeper:liquidate": "pnpm --filter @swapline/scripts liquidate",
+    "fork": "powershell -ExecutionPolicy Bypass -File scripts/fork/start-fork.ps1 -Wait"
+  },
+  "devDependencies": {
+    "viem": "^2.57.3"
+  }
+}

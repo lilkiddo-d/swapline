@@ -1,0 +1,116 @@
+{
+  "_comment": "Canonical Robinhood Chain mainnet data used by contracts/script/Deploy.s.sol and config/chains.ts. Every address was taken from the linked official source AND verified on-chain (see docs/RATE_SOURCES.md for the probe results). Do not edit without re-verifying.",
+  "chainId": 4663,
+  "name": "Robinhood Chain",
+  "rpcUrl": "https://rpc.mainnet.chain.robinhood.com",
+  "explorer": "https://robinhoodchain.blockscout.com",
+  "verifierUrl": "https://robinhoodchain.blockscout.com/api/",
+  "gasToken": "ETH",
+  "tokens": {
+    "USDG": {
+      "address": "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168",
+      "decimals": 6,
+      "source": "https://docs.robinhood.com/chain/contracts"
+    },
+    "WETH": {
+      "address": "0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73",
+      "decimals": 18,
+      "source": "https://docs.robinhood.com/chain/contracts"
+    }
+  },
+  "oracles": {
+    "USDG_USD": {
+      "address": "0x61B7e5650328764B076A108EFF5fa7282a1B9aD2",
+      "decimals": 8,
+      "heartbeatSeconds": 93600,
+      "source": "Chainlink (docs.chain.link/data-feeds/price-feeds/addresses?network=robinhood); on-chain description() = 'USDG / USD'",
+      "heartbeatNote": "Feed updates every 24h exactly (measured over 8 rounds, 2026-10-09); 26h used so trading is not blocked in the seconds before each update."
+    },
+    "SYRUPUSDG_USDG_EXCHANGE_RATE": {
+      "address": "0xDd194C66aDcb422F188a04434e4824D70c151cF0",
+      "decimals": 18,
+      "source": "https://github.com/maple-labs/maple-docs/pull/157 (integrate/crosschain/syrupusd-crosschain.md, Robinhood Chain tab); on-chain description() = 'syrupUSDG / USDG Exchange Rate'"
+    },
+    "SEQUENCER_UPTIME": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "source": "Not available on Robinhood Chain (Chainlink L2 sequencer uptime feeds do not list it). OracleAdapter keeps the check pluggable."
+    }
+  },
+  "lending": {
+    "MORPHO_BLUE": {
+      "address": "0x9D53d5E3bd5E8d4Cbfa6DB1ca238AEA02E651010",
+      "source": "https://docs.morpho.org/get-started/resources/addresses/"
+    },
+    "MORPHO_ADAPTIVE_CURVE_IRM": {
+      "address": "0x2BD3d5965B26B51814AC95127B2b80dD6CcC0fa1",
+      "source": "https://docs.morpho.org/get-started/resources/addresses/"
+    }
+  },
+  "rateSources": [
+    {
+      "key": "steakUSDG",
+      "kind": "erc4626",
+      "category": "lending",
+      "description": "Steakhouse USDG - Morpho Vault V2 (on-chain USDG lending rate)",
+      "target": "0xBeEff033F34C046626B8D0A041844C5d1A5409dd",
+      "yieldToken": "0xBeEff033F34C046626B8D0A041844C5d1A5409dd",
+      "maxAgeSeconds": 0,
+      "maxRatePerYear": "300000000000000000",
+      "initialRate": "43000000000000000",
+      "fixedRateVault": true,
+      "source": "https://app.morpho.org/robinhood-chain/vault/0xBeEff033F34C046626B8D0A041844C5d1A5409dd/steakhouse-usdg",
+      "initialRateSource": "Morpho API vault apy 4.37% (2026-10-09) -> ~4.3% APR"
+    },
+    {
+      "key": "spUSDG",
+      "kind": "spark",
+      "category": "rwa-savings",
+      "description": "Spark Savings USDG (Sky savings rate, T-bill-backed collateral base)",
+      "target": "0xde770c84FE66E063336b31737cFE9790f18c4087",
+      "yieldToken": "0xde770c84FE66E063336b31737cFE9790f18c4087",
+      "maxAgeSeconds": 0,
+      "maxRatePerYear": "300000000000000000",
+      "initialRate": "34400000000000000",
+      "fixedRateVault": true,
+      "source": "https://docs.spark.finance/dev/savings/spark-vaults-v2",
+      "initialRateSource": "on-chain vsr = 3.44% APR (2026-10-09)"
+    },
+    {
+      "key": "syrupUSDG",
+      "kind": "chainlink",
+      "category": "rwa-credit",
+      "description": "Maple syrupUSDG (institutional credit, bridged; Maple exchange-rate feed)",
+      "target": "0xDd194C66aDcb422F188a04434e4824D70c151cF0",
+      "yieldToken": "0x40858070814a57FdF33a613ae84fE0a8b4a874f7",
+      "maxAgeSeconds": 172800,
+      "maxRatePerYear": "300000000000000000",
+      "initialRate": "48500000000000000",
+      "fixedRateVault": false,
+      "source": "https://github.com/maple-labs/maple-docs/pull/157",
+      "initialRateSource": "Maple feed growth over last 7/30 rounds = 4.85%/4.88% (2026-10-09)"
+    }
+  ],
+  "maturitiesDays": [
+    30,
+    91,
+    182
+  ],
+  "gaps": [
+    "No tokenized T-bill / money-market fund token (BUIDL, USTB, OUSG, USDY, BENJI) is deployed on Robinhood Chain as of 2026-10-08. ChainlinkRateSource accepts any NAV/exchange-rate feed so one can be added via MarketFactory once issued.",
+    "No Chainlink L2 sequencer uptime feed on Robinhood Chain; OracleAdapter.setSequencerFeed can enable it later.",
+    "syrupUSDG is a bridged token on Robinhood Chain; its index comes from Maple's on-chain exchange-rate feed (updated from Ethereum), not a local ERC-4626 share price."
+  ],
+  "explorers": {
+    "etherscan": "https://robin.etherscan.io",
+    "etherscanApi": "https://api.etherscan.io/v2/api?chainid=4663",
+    "blockscout": "https://robinhoodchain.blockscout.com",
+    "blockscoutApi": "https://robinhoodchain.blockscout.com/api/",
+    "source": "https://api.etherscan.io/v2/chainlist ; https://docs.robinhood.com/chain/deploy-smart-contracts"
+  },
+  "utility": {
+    "MULTICALL3": {
+      "address": "0xcA11bde05977b3631167028862bE2a173976CA11",
+      "source": "canonical deterministic deployment; verified on-chain 2026-10-09 (getChainId()==4663)"
+    }
+  }
+}

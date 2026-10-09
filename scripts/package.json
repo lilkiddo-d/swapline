@@ -1,0 +1,22 @@
+{
+  "name": "@swapline/scripts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Swapline keepers: oracle rate snapshots, daily mark-to-market and liquidations. Signs only through the Foundry keystore account `swapline-keeper` (via cast); never handles private keys.",
+  "scripts": {
+    "keeper": "node src/keeper.ts all",
+    "snapshot": "node src/keeper.ts snapshot",
+    "liquidate": "node src/keeper.ts liquidate",
+    "once": "node src/keeper.ts all --once",
+    "reference": "node reference/rateReference.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "viem": "^2.37.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  }
+}
